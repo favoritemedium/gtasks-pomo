@@ -1,0 +1,20 @@
+{
+    "node": true,
+    "browser": true,
+    "boss": true,
+    "esnext": true,
+    "eqeqeq": true,
+    "immed": true,
+    "laxcomma": true,
+    "newcap": true,
+    "noarg": true,
+    "quotmark": "single",
+    "regexp": true,
+    "undef": true,
+    "strict": true,
+    "trailing": true,
+    "smarttabs": true,
+    "globals" : {
+        "chrome": true
+    }
+}
