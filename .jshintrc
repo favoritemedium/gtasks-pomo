@@ -3,7 +3,6 @@
     "browser": true,
     "boss": true,
     "esnext": true,
-    "eqeqeq": true,
     "immed": true,
     "laxcomma": true,
     "newcap": true,
@@ -11,7 +10,7 @@
     "quotmark": "single",
     "regexp": true,
     "undef": true,
-    "strict": true,
+    "proto": true,
     "trailing": true,
     "smarttabs": true,
     "globals" : {
