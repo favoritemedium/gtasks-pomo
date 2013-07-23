@@ -3,6 +3,10 @@
     "browser": true,
     "boss": true,
     "esnext": true,
+    "eqnull": true,
+    "-W041": false,
+    "-W032": true,
+    "-W117": true,
     "immed": true,
     "laxcomma": true,
     "newcap": true,
@@ -13,6 +17,7 @@
     "proto": true,
     "trailing": true,
     "smarttabs": true,
+    "supernew": true,
     "globals" : {
         "chrome": true
     }
