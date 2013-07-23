@@ -1,16 +1,21 @@
 <!doctype html>
 <html>
-    <head>
-        <link href="styles/main.css" rel="stylesheet">
-        <!-- build:js scripts/popup.js -->
-        <script src="oauth2/oauth2.js"></script>
-        <script src="scripts/lib/google.js"></script>
-        <script src="scripts/lib/google-tasks.js"></script>
-        <script src="scripts/popup.js"></script>
-        <!-- endbuild -->
-    </head>
-    <body>
-        <button id="btn"></button>
-        <!-- CHROME EXTENSION POPUP -->
-    </body>
+<head>
+  <link href="styles/main.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="counter"></div>
+  <div id="tasks"></div>
+
+  <!-- build:js scripts/popup.js -->
+  <script src="scripts/lib/domify.js"></script>
+  <script src="scripts/lib/emitter.js"></script>
+  <script src="oauth2/oauth2.js"></script>
+  <script src="scripts/lib/google.js"></script>
+  <script src="scripts/lib/google-tasks.js"></script>
+  <script src="scripts/lib/task-view.js"></script>
+  <script src="scripts/popup.js"></script>
+  <!-- endbuild -->
+</body>
 </html>
