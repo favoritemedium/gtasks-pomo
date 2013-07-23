@@ -16,11 +16,20 @@
 
   var tasks = document.querySelector('#tasks');
 
+  /**
+   * Start alarm
+   */
+
+  var startAlarm = function(id){
+    rt.sendMessage({ name:'taskstart', id:id });
+  };
+
   var showUI = function(err, items){
     if (err) throw err;
 
     items.forEach(function(task){
       var view = new TaskView(task);
+      view.on('start', startAlarm);
       tasks.appendChild(view.el);
     });
   };
