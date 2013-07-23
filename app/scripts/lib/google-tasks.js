@@ -8,8 +8,52 @@
 
 (function(){
 
-  // var apiRoot = 'https://www.googleapis.com/tasks/v1/lists/@me';
-  var apiRoot = 'https://www.googleapis.com/tasks/v1/users/@me/lists';
+  /**
+   * Constructor
+   */
+
+  function Task(id){}
+
+  /**
+   * Fetch list of tasks with the taskslist ID
+   * callback with `fn(err, tasks)`
+   *
+   * @param {String} tid
+   * @param {Function} fn
+   * @api public
+   */
+
+  Task.list = function(tid, fn){
+    var url = 'https://www.googleapis.com/tasks/v1/lists/' + tid + '/tasks?showCompleted=false';
+
+    Google.get(url, function(err, res){
+      if (err) return fn(err);
+      var items = res.items.map(function(item){
+        item.__proto__ = Task.prototype;
+        return item;
+      });
+      fn(null, items);
+    });
+  };
+
+  Task.prototype.done = function(){
+    Google.patch(this.selfLink
+      , { status: 'completed' }
+      , function(err, data){
+          console.log('done', data);
+        }
+      );
+  };
+
+  Task.prototype.del = function(){
+    // TODO:
+    // Implement del
+  };
+
+  Task.prototype.info = function(){
+    // TODO:
+    // Implement info
+  };
 
   /**
    * Expose `TasksList`
@@ -17,15 +61,11 @@
 
   window.TasksList = TasksList;
 
-
   /**
    * Constructor
    */
 
-  function TasksList(id, title){
-    this.id = id;
-    this.title = title;
-  }
+  function TasksList(){}
 
   /**
    * Fetch lists of `taskslist`
@@ -38,11 +78,13 @@
   TasksList.list = function(fn){
     console.info('INFO: TASKSLIST: Getting list of taskslist');
 
-    Google.get(apiRoot, function(err, data){
-      if (err) return fn(err);
+    var url = 'https://www.googleapis.com/tasks/v1/users/@me/lists';
 
+    Google.get(url, function(err, data){
+      if (err) return fn(err);
       var items = data.items.map(function(item){
-        return new TasksList(item.id, item.title);
+        item.__proto__ = TasksList.prototype;
+        return item;
       });
       fn(null, items);
     });
@@ -56,34 +98,15 @@
    * @api public
    */
 
-  TasksList.prototype.get = function(fn){
+  TasksList.prototype.getItems = function(fn){
     console.info('INFO: TASKSLIST: Getting taskslist details');
 
-    var url = apiRoot + '/' + this.id;
-    Google.get(url, function(err, list){
-      if (err) return fn(err);
-      console.log(list);
-      Google.get(url + '/tasks', function(err, items){
-        console.log(items);
-        fn(null, items);
-      });
-    });
+    Task.list(this.id, fn);
   };
 
   TasksList.prototype.del = function(fn){
     // TODO:
     // Implement del
   };
-
-
-  function Task(id){
-
-  }
-
-  Task.prototype.done = function(){};
-
-  Task.prototype.del = function(){};
-
-  Task.prototype.info = function(){};
 
 })();

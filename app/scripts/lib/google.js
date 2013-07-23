@@ -80,11 +80,14 @@
    */
 
   Google.ready = function(fn){
+    console.info('INFO: Registering ready function');
+
     if (!ready) {
       fns.push(fn);
       return;
     }
 
+    console.log('INFO: Google API ready');
     setTimeout(fn, 0);
   };
 
@@ -97,16 +100,33 @@
    * @api public
    */
 
-  Google.get = function(url, fn) {
+  Google.get = function(url, query, fn) {
     console.info('INFO: Sending Request to Google API');
 
-    if (!ready) { throw new Error('Google OAuth is not ready'); }
+    if (!ready) { throw new Error('Google API is not ready'); }
+
+    if ('function' === typeof query) {
+      fn = query;
+      query = undefined;
+    }
+
+    var qs = '';
+
+    if (query) {
+      qs = '?';
+      Object.keys(query).forEach(function(k){
+        qs += k + '=';
+        qs += encodeURIComponent(query[k]);
+        qs += '&';
+      });
+      qs = qs.substring(0, qs.length - 1);
+    }
 
     // TODO:
     // check for token expiry
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, false);
+    xhr.open('GET', url + qs, false);
     xhr.setRequestHeader('Authorization', 'OAuth ' + _google.getAccessToken());
     xhr.onreadystatechange = function(event) {
       if (xhr.readyState !== 4) { return; }
@@ -125,6 +145,31 @@
       fn(err);
     };
     xhr.send();
+  };
+
+  Google.patch = function(url, data, fn){
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('PATCH', url, false);
+    xhr.setRequestHeader('Authorization', 'OAuth ' + _google.getAccessToken());
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function(event) {
+      if (xhr.readyState !== 4) { return; }
+      var err;
+      if(~[200, 304].indexOf(xhr.status)) {
+        console.info('INFO: Google API response');
+        try {
+          return fn(null, JSON.parse(xhr.responseText));
+        } catch(e) {
+          err = e;
+        }
+      } else {
+        err = new Error('Unable to get data');
+      }
+      console.error('ERROR: ', err);
+      fn(err);
+    };
+    xhr.send(JSON.stringify(data));
   };
 
 })();
