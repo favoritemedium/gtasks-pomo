@@ -2,8 +2,11 @@
 
 (function(){
 
-  var html = '<div class="task">\n  <button>Start</button>\n  <span class="title"></span>\n</div>'
-    ;
+  var html = '\
+    <a class="task"> \
+      <span class="title"></span> \
+    </a> \
+  ';
 
   /**
    * Expose `TaskView`
