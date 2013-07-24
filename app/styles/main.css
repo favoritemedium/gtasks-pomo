@@ -1,5 +1,197 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
-html {
-  width: 200px;
+html { min-width: 300px; }
+body, button {
+  margin: 0;
+  font-family: 'Open Sans', Helvetica, Arial, Sans-Serif;
 }
+a {
+  color: #333;
+  cursor: pointer;
+}
+a:hover,
+a:active { color: red; }
+* { box-sizing: border-box; }
+
+
+/**
+ * Curved Shadow
+ */
+
+.curved-shadow {
+  background-color: inherit;
+  position: relative;
+  z-index: 3;
+}
+.curved-shadow:before {
+  top: 50%;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  border-radius: 100px / 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  content: "";
+  position: absolute;
+  z-index: -2;
+}
+.curved-shadow:after {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: inherit;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+/**
+ * Counter
+ */
+
+.counter {
+  height: 80px;
+  padding: 20px 30px 15px;
+  text-align: center;
+}
+.counter,
+.counter:after {
+  background-color: #fff;
+}
+.counter canvas,
+.counter object,
+.counter img {
+  width: 40px;
+  height: 40px;
+  margin: 0 25px 0 0;
+}
+.counter .timer {
+  font-size: 24px;
+  font-weight: 700;
+  color: #888;
+}
+.counter canvas,
+.counter img,
+.counter object,
+.counter .timer {
+  display: inline-block;
+  vertical-align: middle;
+}
+.counter .minutes { color: red; }
+.counter .minutes:after {
+  font-size: 20px;
+  content: ':';
+  color: #888;
+  margin: 0 20px;
+  top: -2px;
+  position: relative;
+}
+.counter .seconds { margin-left: -4px; }
+
+/**
+ * Counter Actions
+ */
+
+.counter-action {
+  min-height: 50px;
+  padding: 10px 15px;
+  background-color: #eee;
+}
+.counter-action .actions {
+  text-align: center;
+}
+.counter-action .actions button {
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 0 #fff;
+  color: red;
+  background-image: linear-gradient(to bottom,
+    #fafafa   0%,
+    #fefffe  10%,
+    #fefffe  15%,
+    #fafafa  20%,
+    #eeefee  80%,
+    #f0f0f0  96%,
+    #f0f0f0  98%,
+    #eeefee 100%
+  );
+  margin-bottom: 3px;
+  padding: .5em 2.5em;
+  border: 0;
+  border-radius: 3px;
+  box-shadow:
+    0 -2px 3px rgba(0,0,0,.3) inset,
+    0 0 3px rgba(0,0,0,.3)
+  ;
+  cursor: pointer;
+}
+.counter-action .actions button:hover,
+.counter-action .actions button:active {
+  text-shadow: none;
+  color: #fff;
+  background-image: linear-gradient(to bottom, #888 0%, #ccc 100%);
+}
+.counter-action .actions .optional {
+  font-size: 9px;
+  font-weight: 700;
+  text-decoration: underline;
+  display: block;
+}
+.counter-action .message {
+  font-size: 12px;
+  font-weight: 300;
+  margin: 5px 0 0;
+}
+.counter-action .break {
+  font-size: 18px;
+  text-align: center;
+  margin: 5px 0 0;
+}
+.counter-action .break span {
+  font-size: 18px;
+  font-weight: 700;
+  color: red;
+}
+
+/**
+ * Tasks
+ */
+
+#tasklist {
+  border-bottom: 5px solid #ddeda0;
+}
+#tasklist h1 {
+  background-color: #ddeda0;
+  border-bottom: 1px solid #fff;
+  margin: 0;
+  padding: .5em 1em;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 1px 1px 0 #fff;
+}
+#tasklist h1:after {
+  background-color: #ddeda0;
+}
+.task {
+  font-size: 14px;
+  text-shadow: 1px 1px 0 #fff;
+  padding: 8px 11px;
+  border-bottom: 1px solid #fff;
+  background-color: #f2f9e5;
+  display: block;
+  cursor: pointer;
+  -webkit-transition: background-color .5s, color .25s;
+     -moz-transition: background-color .5s, color .25s;
+          transition: background-color .5s, color .25s;
+}
+.task:nth-child(2n) { background-color: #e7edd9; }
+.task:hover,
+.task:active {
+  color: #fff;
+  background-color: #9ca093;
+  text-shadow: none;
+}
+
+.hidden { display: none !important; }

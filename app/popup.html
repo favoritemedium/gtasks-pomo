@@ -1,12 +1,24 @@
 <!doctype html>
 <html>
 <head>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
   <link href="styles/main.css" rel="stylesheet">
 </head>
 <body>
 
-  <div id="counter"></div>
-  <div id="tasks"></div>
+  <section id="counter">
+    <!-- .counter -->
+    <!-- .counter-action -->
+  </section>
+
+  <section id="tasklist">
+    <h1 class="curved-shadow">
+      Choose a task to start:
+    </h1>
+    <div id="tasks">
+      <!-- .task -->
+    </div>
+  </section>
 
   <!-- build:js scripts/popup.js -->
   <script src="scripts/lib/domify.js"></script>
@@ -15,6 +27,8 @@
   <script src="scripts/lib/google.js"></script>
   <script src="scripts/lib/google-tasks.js"></script>
   <script src="scripts/lib/task-view.js"></script>
+  <script src="scripts/lib/counter-view.js"></script>
+  <script src="scripts/lib/counter-action-view.js"></script>
   <script src="scripts/popup.js"></script>
   <!-- endbuild -->
 </body>

@@ -16,6 +16,13 @@
 
   var tasks = document.querySelector('#tasks');
 
+
+  /**
+   * Counter container
+   */
+
+  var counter = document.querySelector('#counter');
+
   /**
    * Start alarm
    */
@@ -24,14 +31,30 @@
     rt.sendMessage({ name:'taskstart', id:id });
   };
 
-  var showUI = function(err, items){
-    if (err) throw err;
+  var showCounter = function(){
+    var f = document.createDocumentFragment();
+    var c = new CounterView();
+    var a = new CounterActionView();
 
+    f.appendChild(c.el);
+    f.appendChild(a.el);
+    counter.appendChild(f);
+  };
+
+  var showUI = function(items){
+    var frag = document.createDocumentFragment();
     items.forEach(function(task){
       var view = new TaskView(task);
       view.on('start', startAlarm);
-      tasks.appendChild(view.el);
+      frag.appendChild(view.el);
     });
+    tasks.appendChild(frag);
+  };
+
+  var init = function(err, items){
+    if (err) throw err;
+    showUI(items);
+    showCounter();
   };
 
   Google.init(
@@ -43,7 +66,7 @@
   Google.ready(function(){
     TasksList.list(function(err, taskslists){
       // Take first taskslist from GTasks
-      taskslists[0].getItems(showUI);
+      taskslists[0].getItems(init);
     });
   });
 
