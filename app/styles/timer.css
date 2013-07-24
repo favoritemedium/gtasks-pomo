@@ -1,0 +1,28 @@
+
+#timer-break {
+  -webkit-transform-origin: 50% 250%;
+}
+
+#timer-task {
+  -webkit-transform-origin: 50% 300%;
+}
+.do-break {
+  -webkit-animation-name: dot-cycle;
+  -webkit-animation-duration: 300s;
+}
+.do-long-break {
+  -webkit-animation-duration: 1800s;
+}
+.do-task {
+  -webkit-animation-name: dot-cycle;
+  -webkit-animation-duration: 1500s;
+}
+
+@-webkit-keyframes dot-cycle {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
