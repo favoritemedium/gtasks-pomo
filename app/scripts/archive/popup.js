@@ -11,10 +11,16 @@
   var rt = chrome.runtime;
 
   /**
+   * Bridge between background and popup
+   */
+
+  var bg = chrome.runtime.connect({ name:'pop' });
+
+  /**
    * Tasks container
    */
 
-  var tasks = document.querySelector('#tasks');
+  var tasks = document.querySelector('#tasklist');
 
 
   /**
@@ -24,50 +30,107 @@
   var counter = document.querySelector('#counter');
 
   /**
+   * Actions View
+   */
+
+  var actionView = new CounterActionView();
+
+  /**
+   * Actions View
+   */
+
+  var counterView = new CounterView();
+
+  /**
    * Start alarm
    */
 
-  var startAlarm = function(id){
-    rt.sendMessage({ name:'taskstart', id:id });
+  var showCounter = function(task){
+    actionView.setupTask(task);
+    counter.classList.remove('hidden');
+    tasks.classList.add('hidden');
   };
 
-  var showCounter = function(){
-    var f = document.createDocumentFragment();
-    var c = new CounterView();
-    var a = new CounterActionView();
+  var hideCounter = function(){
+    actionView.reset();
+    counterView.reset();
+    counter.classList.add('hidden');
+    tasks.classList.remove('hidden');
+  }
 
-    f.appendChild(c.el);
-    f.appendChild(a.el);
-    counter.appendChild(f);
+  var setupCounter = function(){
+    actionView.on('action', function(type, task){
+      switch(type){
+        case 'start':
+          bg.postMessage({ name:'taskstart', task:task });
+          break;
+        case 'break':
+          bg.postMessage({ name:'dobreak', task:task });
+          break;
+        case 'backtolist':
+          hideCounter();
+          break;
+      }
+    });
+    counter.appendChild(counterView.el);
+    counter.appendChild(actionView.el);
   };
 
-  var showUI = function(items){
+  var setupList = function(items){
     var frag = document.createDocumentFragment();
     items.forEach(function(task){
       var view = new TaskView(task);
-      view.on('start', startAlarm);
+      view.on('start', showCounter);
       frag.appendChild(view.el);
     });
-    tasks.appendChild(frag);
+    tasks.querySelector('#tasks').appendChild(frag);
   };
 
   var init = function(err, items){
     if (err) throw err;
-    showUI(items);
-    showCounter();
+
+    // setupList(items);
+    // setupCounter()
+
+    counter.classList.add('hidden');
   };
 
-  Google.init(
-    '370558891874-tcji26dm7t571mgbl88phr42qdpbtluh.apps.googleusercontent.com'
-  , 'x0wjP4psSLwuGeQyYtQ37lNg'
-  , ['https://www.googleapis.com/auth/tasks']
-  );
-
-  Google.ready(function(){
-    TasksList.list(function(err, taskslists){
-      // Take first taskslist from GTasks
-      taskslists[0].getItems(init);
+  Bridge.ready(function(){
+    Bridge.Task.list(function(taskslists){
+      Bridge.Task.getItems(taskslists[0].id, init);
     });
   });
+
+  bg.onMessage.addListener(function(msg){
+    console.log(msg)
+    switch(msg.name){
+      case 'taskstarted':  taskstarted(msg); break;
+      case 'taskended':    taskended(msg); break;
+      case 'breakstarted': breakstarted(msg); break;
+      case 'breakended':   breakended(msg); break;
+    }
+  });
+
+  function taskstarted(msg){
+    actionView.start();
+    counterView.setupTask(msg.goal);
+    counterView.start();
+    console.info('INFO: COUNTER: Count started');
+  }
+
+  function taskended(msg){
+    actionView.end();
+    counterView.end();
+  }
+
+  function breakstarted(msg){
+    actionView.dobreak(msg.times)
+    counterView.dobreak(msg.goal, msg.times);
+  }
+
+  function breakended(msg){
+    actionView.breakend();
+    counterView.breakend();
+  }
 
 })();
