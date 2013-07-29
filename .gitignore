@@ -5,3 +5,7 @@ dist
 .sass-cache
 app/bower_components
 package
+app.crx
+dist.crx
+app.pem
+dist.pem
