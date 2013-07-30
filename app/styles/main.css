@@ -58,21 +58,24 @@ a:active { color: red; }
 .counter:after {
   background-color: #fff;
 }
-.counter canvas,
-.counter object,
-.counter img {
+.counter .state-art,
+.counter object {
   width: 40px;
   height: 40px;
-  margin: 0 25px 0 0;
+  position: relative;
+}
+.counter object {
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 .counter .timer {
   font-size: 24px;
   font-weight: 700;
   color: #888;
+  margin-left: 25px;
 }
-.counter canvas,
-.counter img,
-.counter object,
+.counter .state-art,
 .counter .timer {
   display: inline-block;
   vertical-align: middle;
@@ -129,7 +132,7 @@ a:active { color: red; }
 .counter-action .actions button:hover,
 .counter-action .actions button:active {
   text-shadow: none;
-  color: #fff;
+  color: rgba(255,255,255,.75);
   background-image: linear-gradient(to bottom, #888 0%, #ccc 100%);
 }
 .counter-action .actions .optional {
@@ -140,18 +143,37 @@ a:active { color: red; }
 }
 .counter-action .message {
   font-size: 12px;
-  font-weight: 300;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
   margin: 5px 0 0;
 }
-.counter-action .break {
+.counter-action .break-message {
   font-size: 18px;
   text-align: center;
   margin: 5px 0 0;
 }
-.counter-action .break span {
+.counter-action .break-message span {
   font-size: 18px;
   font-weight: 700;
   color: red;
+}
+
+.counter-action.end .break-message,
+.counter-action.start .break-message,
+.counter-action.running .break-message,
+.counter-action.running .actions,
+.counter-action.break .message,
+.counter-action.break .actions {
+  display: none;
+}
+
+.counter-action.running:hover .actions,
+.counter-action.running:active .actions {
+  display: block;
+}
+.counter-action.running:hover .message,
+.counter-action.running:active .message {
+  display: none;
 }
 
 /**
@@ -186,12 +208,14 @@ a:active { color: red; }
      -moz-transition: background-color .5s, color .25s;
           transition: background-color .5s, color .25s;
 }
-.task:nth-child(2n) { background-color: #e7edd9; }
-.task:hover,
-.task:active {
+span.task { cursor: default; }
+a.task:nth-child(2n) { background-color: #e7edd9; }
+a.task:hover,
+a.task:active {
   color: #fff;
   background-color: #9ca093;
   text-shadow: none;
 }
 
 .hidden { display: none !important; }
+.invisible { visibility: hidden !important; }

@@ -6,12 +6,12 @@
 </head>
 <body>
 
-  <section id="counter">
+  <section id="counter" class="hidden">
     <!-- .counter -->
     <!-- .counter-action -->
   </section>
 
-  <section id="tasklist">
+  <section id="tasklist" class="hidden">
     <h1 class="curved-shadow">
       Choose a task to start:
     </h1>
@@ -23,13 +23,11 @@
   <!-- build:js scripts/popup.js -->
   <script src="scripts/lib/domify.js"></script>
   <script src="scripts/lib/emitter.js"></script>
-  <script src="oauth2/oauth2.js"></script>
-  <script src="scripts/lib/google.js"></script>
-  <script src="scripts/lib/google-tasks.js"></script>
+  <script src="scripts/popup/bridge.js"></script>
   <script src="scripts/lib/task-view.js"></script>
   <script src="scripts/lib/counter-view.js"></script>
   <script src="scripts/lib/counter-action-view.js"></script>
-  <script src="scripts/popup.js"></script>
+  <script src="scripts/popup/main.js"></script>
   <!-- endbuild -->
 </body>
 </html>

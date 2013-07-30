@@ -1,6 +1,6 @@
 {
   "name": "__MSG_appName__",
-  "version": "0.0.5",
+  "version": "0.0.14",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
@@ -11,7 +11,11 @@
   "background": {
     "scripts": [
       "oauth2/oauth2.js",
-      "scripts/background.js"
+      "scripts/lib/emitter.js",
+      "scripts/background/google.js",
+      "scripts/background/config.js",
+      "scripts/background/task.js",
+      "scripts/background/main.js"
     ]
   },
   "browser_action": {

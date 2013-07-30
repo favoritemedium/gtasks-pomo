@@ -3,9 +3,7 @@
 (function(){
 
   var html = '\
-    <a class="task"> \
-      <span class="title"></span> \
-    </a> \
+    <a class="task"></a> \
   ';
 
   /**
@@ -27,13 +25,9 @@
     this.obj = task;
     Emitter.call(this);
 
-    el.querySelector('.title').textContent = task.title;
-    el.querySelector('button')
-      .addEventListener(
-        'click'
-      , this.start.bind(this)
-      , false
-      );
+    el.dataset.id = this.obj.id;
+    el.textContent = task.title;
+    el.addEventListener('click', this.start.bind(this), false);
   }
 
   /**
@@ -58,7 +52,7 @@
    */
 
   TaskView.prototype.start = function(){
-    this.emit('start', this.obj.id);
+    this.emit('start', this.obj);
   };
 
 })();
