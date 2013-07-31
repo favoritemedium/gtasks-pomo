@@ -218,7 +218,7 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         'images/{,*/}*.{webp,gif}',
                         '_locales/{,*/}*.json',
-                        'oauth2/**/*.js',
+                        'oauth2/**/*',
                         'styles/timer.css'
                     ]
                 }, {

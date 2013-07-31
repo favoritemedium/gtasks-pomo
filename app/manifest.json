@@ -37,9 +37,6 @@
       "run_at": "document_start"
     }
   ],
-  "omnibox": {
-    "keyword": "pomo"
-  },
   "permissions": [
     "https://accounts.google.com/o/oauth2/token",
     "alarms"
