@@ -216,7 +216,7 @@ module.exports = function (grunt) {
                     dest: '<%= yeoman.dist %>',
                     src: [
                         '*.{ico,png,txt}',
-                        'images/{,*/}*.{webp,gif}',
+                        'images/{,*/}*.{webp,gif,svg}',
                         '_locales/{,*/}*.json',
                         'oauth2/**/*',
                         'styles/timer.css'
@@ -244,7 +244,7 @@ module.exports = function (grunt) {
                 'coffee',
                 'compass:dist',
                 'imagemin',
-                'svgmin',
+                // 'svgmin',
                 'htmlmin'
             ]
         },
