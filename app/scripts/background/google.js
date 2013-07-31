@@ -54,11 +54,18 @@
   Google.init = function(id, secret, scopes, fn){
     console.info('INFO: Initailizing Google API');
 
-    _google = new OAuth2('google', {
-      client_id: id,
-      client_secret: secret,
-      api_scope: scopes.join(' ')
-    });
+    var data, hasAccess, hasRefresh;
+
+    _google = new OAuth2('google');
+    data = _google.get();
+    hasAccess = _google.hasAccessToken();
+    hasRefresh = hasAccess && (! _google.isAccessTokenExpired() && data.refreshToken);
+    if (! hasRefresh )
+      _google.setSource({
+        clientId: id,
+        clientSecret: secret,
+        apiScope: scopes.join(' ')
+      });
 
     if ('function' === typeof fn)
       fns.push(fn);
