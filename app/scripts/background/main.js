@@ -4,6 +4,8 @@
   var successSound = new Audio();
   var breakendSound = new Audio();
 
+  successSound.volume = 0.5;
+  breakendSound.volume = 0.5;
   successSound.src = AppConfig.successAudioPath;
   breakendSound.src = AppConfig.breakendAudioPath;
 
