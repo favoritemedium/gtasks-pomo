@@ -1,6 +1,6 @@
 {
-  "name": "pomo",
-  "version": "0.0.17",
+  "name": "tomato-tasks",
+  "version": "0.0.20",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
