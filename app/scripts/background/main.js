@@ -31,8 +31,8 @@
   var state = 'idle';
 
   Google.init(
-    '370558891874-tcji26dm7t571mgbl88phr42qdpbtluh.apps.googleusercontent.com'
-  , 'x0wjP4psSLwuGeQyYtQ37lNg'
+    AppConfig.id
+  , AppConfig.secret
   , ['https://www.googleapis.com/auth/tasks']
   );
 

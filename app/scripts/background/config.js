@@ -2,6 +2,18 @@
 (function(){
 
   /**
+   * Client ID from google apis console
+   */
+
+  var clientId = '370558891874-tcji26dm7t571mgbl88phr42qdpbtluh.apps.googleusercontent.com';
+
+  /**
+   * Client Secret from google apis console
+   */
+
+  var clientSecret = 'x0wjP4psSLwuGeQyYtQ37lNg';
+
+  /**
    * Times of task completed
    */
 
@@ -21,6 +33,11 @@
   window.Config = {
     timespan: timespan
   , times: times
+  };
+
+  window.AppConfig = {
+    id: clientId
+  , secret: clientSecret
   };
 
 })();
