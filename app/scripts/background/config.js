@@ -14,6 +14,13 @@
   var clientSecret = 'x0wjP4psSLwuGeQyYtQ37lNg';
 
   /**
+   * Path to audio files
+   */
+
+  var successAudioPath = '';
+  var breakendAudioPath = '';
+
+  /**
    * Times of task completed
    */
 
@@ -38,6 +45,8 @@
   window.AppConfig = {
     id: clientId
   , secret: clientSecret
+  , successAudioPath: successAudioPath
+  , breakendAudioPath: breakendAudioPath
   };
 
 })();

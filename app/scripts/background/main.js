@@ -1,6 +1,12 @@
 
 (function(){
 
+  var successSound = new Audio();
+  var breakendSound = new Audio();
+
+  successSound.src = AppConfig.successAudioPath;
+  breakendSound.src = AppConfig.breakendAudioPath;
+
   var al = chrome.alarms;
 
   /**
@@ -67,6 +73,7 @@
     switch(alarm.name){
       case 'start':
         state = 'finish';
+        successSound.play();
       break;
       case 'restart':
         state = 'restartend';
@@ -75,6 +82,7 @@
       case 'breakstop':
         current = null;
         state = 'idle';
+        breakendSound.play();
       break;
     }
 
@@ -111,10 +119,10 @@
 
   actions.finish = function(msg){
     Task.done(list.id, msg.task.id, function(){
-      if (msg.name == 'finish-early')
+      if (msg.name == 'finish-early') {
         msg.name = 'break';
-      else
-        send(msg.name, { task: msg.task });
+        successSound.play();
+      } else send(msg.name, { task: msg.task });
 
       actions['break'](msg, taskport);
     });

@@ -219,6 +219,7 @@ module.exports = function (grunt) {
                         'images/{,*/}*.{webp,gif,svg}',
                         '_locales/{,*/}*.json',
                         'oauth2/**/*',
+                        'audios/**/*',
                         'styles/timer.css'
                     ]
                 }, {
