@@ -155,7 +155,7 @@ Task.ready(function(){
       items = data.items;
       fn && fn();
     });
-}
+  }
 
   /**
    * Helpers
