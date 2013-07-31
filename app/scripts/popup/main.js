@@ -152,7 +152,7 @@ Task.ready(function(){
 
   function fetchItems(fn){
     Task.items(function(data){
-      items = data.items;
+      items = data.items || [];
       fn && fn();
     });
   }
