@@ -1,37 +1,66 @@
 
-var bridge = chrome.runtime.connect({ name:'options' });
+(function(){
 
-var timespan;
+  /**
+   * Bridge to communicate between background page
+   * and this page
+   */
 
-function sync(req) {
-  var k;
-  switch(req.name){
-    case 'read':
-      timespan = req.data;
-      for (k in timespan) {
-        document.querySelector('#'+k).value = timespan[k] / 60 / 1000 | 0;
-      }
-      break;
-    case 'ready':
-      bridge.postMessage({ name:'read' });
-      break;
-  }
-}
+  var tsbridge = chrome.runtime.connect({ name:'options' });
+  var audiobridge = chrome.runtime.connect({ name:'audio' });
 
-document.querySelector('form').addEventListener('change', function(e){
-  var target = e.target;
-  if ( ! target.webkitMatchesSelector('input[type=number]')) return;
+  /**
+   * Keep track of timespan
+   */
 
-  var key = target.id;
-  var mins = parseInt(target.value, 10);
+  var timespan;
 
-  if (!mins) return alert('Value must be integer');
+  /**
+   * Audio toggle
+   */
 
-  timespan[key] = mins * 60 * 1000;
+  var audioToggle = document.querySelector('#audio-on-off');
+  audioToggle.addEventListener('change', function(){
+    audiobridge.postMessage({ name:'toggle' });
+  }, false);
 
-  bridge.postMessage({ name: 'write', data: timespan });
+  /**
+   * Handles timespan changes
+   */
 
-}, false);
+  document.querySelector('form').addEventListener('change', function(e){
+    var target = e.target;
+    if ( ! target.webkitMatchesSelector('input[type=number]')) return;
 
+    var key = target.id;
+    var mins = parseInt(target.value, 10);
 
-bridge.onMessage.addListener(sync);
+    if (!mins) return alert('Value must be integer');
+
+    timespan[key] = mins * 60 * 1000;
+    tsbridge.postMessage({ name: 'write', data: timespan });
+
+  }, false);
+
+  tsbridge.onMessage.addListener(function tssync(req) {
+    switch(req.name){
+      case 'read':
+        timespan = req.data;
+        for (var k in timespan)
+          document.querySelector('#'+k).value = timespan[k] / 60 / 1000 | 0;
+        break;
+      case 'ready':
+        tsbridge.postMessage({ name:'read' });
+        break;
+    }
+  });
+
+  audiobridge.onMessage.addListener(function audiosync(req){
+    switch(req.name){
+      case 'read':
+        audioToggle.checked = req.data; break;
+      case 'ready': audiobridge.postMessage({ name:'read' }); break;
+    }
+  });
+
+})();

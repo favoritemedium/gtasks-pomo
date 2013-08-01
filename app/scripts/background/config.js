@@ -31,6 +31,12 @@
   , longrest: 30 * 60 * 1000 // 30mins
   };
 
+  /**
+   * Audio on/off
+   */
+
+  var audioOn = true;
+
 
   window.Config = {
     timespan: new Timespan(timespan)
@@ -39,6 +45,7 @@
   window.AppConfig = {
     id: clientId
   , secret: clientSecret
+  , audioOn: audioOn
   , successAudioPath: successAudioPath
   , breakendAudioPath: breakendAudioPath
   };

@@ -1,14 +1,6 @@
 
 (function(){
 
-  var successSound = new Audio();
-  var breakendSound = new Audio();
-
-  successSound.volume = 0.5;
-  breakendSound.volume = 0.5;
-  successSound.src = AppConfig.successAudioPath;
-  breakendSound.src = AppConfig.breakendAudioPath;
-
   /**
    * Times that tasks has been complete
    */
@@ -85,7 +77,7 @@
     switch(alarm.name){
       case 'start':
         state = 'finish';
-        successSound.play();
+        AudioEffect.play('success');
       break;
       case 'restart':
         state = 'restartend';
@@ -94,7 +86,7 @@
       case 'breakstop':
         current = null;
         state = 'idle';
-        breakendSound.play();
+        AudioEffect.play('break');
       break;
     }
 
@@ -133,7 +125,7 @@
     Task.done(list.id, msg.task.id, function(){
       if (msg.name == 'finish-early') {
         msg.name = 'break';
-        successSound.play();
+        AudioEffect.play('success');
       } else send(msg.name, { task: msg.task });
 
       actions['break'](msg, taskport);

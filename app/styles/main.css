@@ -271,3 +271,35 @@ a.task:active {
   text-align: center;
   padding: 30px 40px 20px;
 }
+
+/**
+ * checkbox
+ */
+
+.checkbox { }
+.checkbox input { display: none; }
+.checkbox input + span {
+  width: 18px;
+  height :18px;
+  border: 1px solid #ccc;
+  border-radius: 100%;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin: 20px 40px 10px 10px ;
+}
+.checkbox input + span:after {
+  content :'OFF';
+  left: 20px;
+  top: -2px;
+  position: absolute;
+}
+.checkbox input:checked + span {
+  background-color: #888;
+  box-shadow: 0 0 0 2px #fff inset;
+}
+.checkbox input:checked + span:after {
+  content: 'ON';
+}
+
+.text-center { text-align: center; }
