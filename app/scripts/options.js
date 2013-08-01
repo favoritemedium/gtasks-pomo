@@ -21,14 +21,14 @@ function sync(req) {
 document.querySelector('form').addEventListener('change', function(e){
   var target = e.target;
   if ( ! target.webkitMatchesSelector('input[type=number]')) return;
-  
+
   var key = target.id;
   var mins = parseInt(target.value, 10);
 
   if (!mins) return alert('Value must be integer');
 
   timespan[key] = mins * 60 * 1000;
-  
+
   bridge.postMessage({ name: 'write', data: timespan });
 
 }, false);

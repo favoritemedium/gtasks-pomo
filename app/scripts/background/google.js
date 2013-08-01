@@ -49,7 +49,7 @@
 
   var refreshToken = function(){
     return _google.get().refreshToken || null;
-  }
+  };
 
   /**
    * Initialize Google API

@@ -23,7 +23,7 @@
           break;
       }
     }
-    
+
     port.postMessage({ name:'ready' });
 
   });
