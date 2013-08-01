@@ -103,7 +103,8 @@ a:active { color: red; }
 .counter-action .actions {
   text-align: center;
 }
-.counter-action .actions button {
+.counter-action .actions button,
+.options-page button {
   outline: none;
   font-size: 14px;
   font-weight: 600;
@@ -130,7 +131,9 @@ a:active { color: red; }
   cursor: pointer;
 }
 .counter-action .actions button:hover,
-.counter-action .actions button:active {
+.counter-action .actions button:active,
+.options-page button:hover,
+.options-page button:active {
   text-shadow: none;
   color: rgba(255,255,255,.75);
   background-image: linear-gradient(to bottom, #888 0%, #ccc 100%);
@@ -219,3 +222,52 @@ a.task:active {
 
 .hidden { display: none !important; }
 .invisible { visibility: hidden !important; }
+
+/**
+ * Options page
+ */
+
+.options-page {
+  background-color: #f2f9e5;
+}
+
+.options-page fieldset {
+  margin-bottom: 20px;
+  border: 0;
+  padding: 0;
+}
+.options-page #fix-auth {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.options-page legend {
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 1px 1px 1px #fff;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: #ddeda0;
+}
+
+.options-page .field {
+  width: 33%;
+  padding: 0 30px 10px;
+  margin-left: -4px;
+  display: inline-block;
+}
+.options-page label { display: block; }
+.options-page input[type=number] {
+  width: 100%;
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+.options-page p {
+  margin: 0;
+  text-align: center;
+  padding: 30px 40px 20px;
+}

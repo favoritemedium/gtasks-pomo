@@ -1,14 +1,33 @@
 <!doctype html>
 <html>
     <head>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
         <link href="styles/main.css" rel="stylesheet">
+    </head>
+    <body class="options-page">
+        <form>
+            <fieldset>
+                <legend class="curved-shadow">Timespan in minutes for</legend>
+                <p>
+                    Values will get auto apply for the next time
+                    you start a task or take a break
+                </p>
+                <div class="field">
+                    <label for="task">Task</label>
+                    <input id="task" type="number" />
+                </div>
+                <div class="field">
+                    <label for="rest">Short Break</label>
+                    <input id="rest" type="number" />
+                </div>
+                <div class="field">
+                    <label for="longrest">Long Break</label>
+                    <input id="longrest" type="number" />
+                </div>
+            </fieldset>
+        </form>
         <!-- build:js scripts/options.js -->
-        <script src="oauth2/oauth2.js"></script>
-        <script src="scripts/base.js"></script>
         <script src="scripts/options.js"></script>
         <!-- endbuild -->
-    </head>
-    <body>
-        <!-- CHROME EXTENSION OPTION -->
     </body>
 </html>

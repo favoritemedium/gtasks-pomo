@@ -41,6 +41,16 @@
 
   var fns = [];
 
+  var accessToken = function(){
+    return _google.hasAccessToken() &&
+      !_google.isAccessTokenExpired() &&
+      _google.getAccessToken() || null;
+  };
+
+  var refreshToken = function(){
+    return _google.get().refreshToken || null;
+  }
+
   /**
    * Initialize Google API
    *
@@ -54,13 +64,8 @@
   Google.init = function(id, secret, scopes, fn){
     console.info('INFO: Initailizing Google API');
 
-    var data, hasAccess, hasRefresh;
-
     _google = new OAuth2('google');
-    data = _google.get();
-    hasAccess = _google.hasAccessToken();
-    hasRefresh = hasAccess && (! _google.isAccessTokenExpired() && data.refreshToken);
-    if (! hasRefresh )
+    if (! (accessToken() || refreshToken()) )
       _google.setSource({
         clientId: id,
         clientSecret: secret,

@@ -9,6 +9,16 @@
   successSound.src = AppConfig.successAudioPath;
   breakendSound.src = AppConfig.breakendAudioPath;
 
+  /**
+   * Times that tasks has been complete
+   */
+
+  var times = 0;
+
+  /**
+   * Cache
+   */
+
   var al = chrome.alarms;
 
   /**
@@ -145,7 +155,7 @@
         al.get(state, function(alarm){
           if (alarm) {
             data.alarm.goal = alarm.scheduledTime;
-            data.alarm.times = Config.times;
+            data.alarm.times = times;
           }
           done();
         });
@@ -164,7 +174,7 @@
   };
 
   actions.ready = function(msg){
-    if (ready) taskport && taskport.postMessage({ name:'ready' });
+    if (ready) send('ready');
     else fns.push(function(){
       send('ready');
     });
@@ -173,7 +183,7 @@
   actions.restart = function(msg){
     var task = msg.task;
 
-    var times = Config.times = Config.times + 1;
+    times += 1;
     var ts = times % 4 ? 'rest' : 'longrest';;
     var goal = +Date.now() + Config.timespan[ts];
 

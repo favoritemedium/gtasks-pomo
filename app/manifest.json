@@ -13,9 +13,11 @@
       "oauth2/oauth2.js",
       "scripts/lib/emitter.js",
       "scripts/background/google.js",
+      "scripts/background/timespan.js",
       "scripts/background/config.js",
       "scripts/background/task.js",
-      "scripts/background/main.js"
+      "scripts/background/main.js",
+      "scripts/background/option-update.js"
     ]
   },
   "browser_action": {
@@ -26,6 +28,7 @@
     "default_title": "pomo",
     "default_popup": "popup.html"
   },
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": [

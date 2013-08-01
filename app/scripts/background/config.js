@@ -20,11 +20,6 @@
   var successAudioPath = '';
   var breakendAudioPath = '';
 
-  /**
-   * Times of task completed
-   */
-
-  var times = 0;
 
   /**
    * Timespans for tasks and break
@@ -38,8 +33,7 @@
 
 
   window.Config = {
-    timespan: timespan
-  , times: times
+    timespan: new Timespan(timespan)
   };
 
   window.AppConfig = {
